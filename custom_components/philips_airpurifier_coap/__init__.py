@@ -130,8 +130,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     try:
         future_client = CoAPClient.create(host)
-        _LOGGER.error("trying to connect to host: %s", host)
-        client = await asyncio.wait_for(future_client, timeout=None)
+        client = await asyncio.wait_for(future_client, timeout=25)
         _LOGGER.debug("got a valid client for host %s", host)
     except Exception as ex:
         _LOGGER.warning(r"Failed to connect to host %s: %s", host, ex)
